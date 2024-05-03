@@ -149,6 +149,16 @@ yy (также Y) — копирование текущей строки в бу
 
 ![Задание №9](image/ST3_12.png){#fig:012 width=70%}
 
+Программа для задания №9:
+
+```
+#!/bin/bash
+var1=$1
+var2=$2
+
+echo "Arguments are: \$1=$var1 \$2=$var2"
+```
+
 Задание №10: на скрине всё видно (рис. [-@fig:013])
 
 ![Задание №10](image/ST3_13.png){#fig:013 width=70%}
@@ -176,6 +186,22 @@ yy (также Y) — копирование текущей строки в бу
 ![Работа программы для задания №12](image/ST3_17.png){#fig:017 width=70%}
 
 ![Задание №12](image/ST3_18.png){#fig:018 width=70%}
+
+Программа для задания №12:
+
+```
+#!/bin/bash
+
+if [[ $1 -eq 1 ]]; then
+    echo "$1 student"
+elif [[ $1 -gt 1 && $1 -le 4 ]]; then
+    echo "$1 students"
+elif [[ $1 -ge 5 ]]; then
+    echo "A lot of students"
+else
+    echo "No students"
+fi
+```
 
 Задание №13: 
 
@@ -206,6 +232,40 @@ yy (также Y) — копирование текущей строки в бу
 
 ![Задание №14 (2)](image/ST3_24.png){#fig:024 width=70%}
 
+Программа для задания №14:
+
+```
+#!/bin/bash
+
+child=16
+adult=25
+stdout=0
+
+while [[ $stdout != 1 ]]
+    do
+        echo "enter your name: "
+        read name
+    if [[ (-z $name) || ($name = 0) ]] ;then
+        echo "bye"
+        stdout=1
+    elif [[ -n $name ]]; then
+        while [[ $stdout != 1 ]] ;do
+            echo "enter your age: "
+            read age
+            if [[ ($age -eq 0) || (-z $age) ]] ;then
+                echo "bye"
+                stdout=1
+            elif [[ $age -le $child ]] ;then
+                echo "$name, your group is child"
+            elif [[ $age -gt $adult ]] ; then
+                echo "$name, your group is adult" ;else
+                if [[ ($age -ge 17) && ($age -le 25) ]] ;then
+                    echo "$name, your group is youth" ;fi
+            fi ;break
+        done ;fi
+done
+```
+
 Задание №15: на скрине всё видно (рис. [-@fig:025])
 
 ![Задание №15](image/ST3_25.png){#fig:025 width=70%}
@@ -228,6 +288,25 @@ yy (также Y) — копирование текущей строки в бу
 
 ![Задание №18](image/ST3_31.png){#fig:031 width=70%}
 
+Программа для задания №18:
+
+```
+#!/bin/bash
+
+counter ()  # takes one argument
+{
+  local let "c1+=$1"
+  let "c2+=${1}*2"
+}
+
+for i in {1..10}
+do
+  counter $i
+done
+
+echo "counters are $c1 and $c2"
+```
+
 Задание №19: создаю файл sh, пишу программу и проверяю работу командного файла (рис. [-@fig:032]), (рис. [-@fig:033]), (рис. [-@fig:034]), (рис. [-@fig:035]), (рис. [-@fig:036])
 
 ![Создание файла для задания №19](image/ST3_32.png){#fig:032 width=70%}
@@ -240,6 +319,37 @@ yy (также Y) — копирование текущей строки в бу
 
 ![Задание №19 (2)](image/ST3_36.png){#fig:036 width=70%}
 
+Программа для задания №19:
+
+```
+#!/bin/bash
+
+while [ true ]
+do
+    read n1 n2
+if [ -z $n1 ]; then
+    echo "bye"
+    break
+else
+    gcd () {
+    remainder=1
+    if [ $n2 -eq 0 ]
+    then
+    echo "bye"
+    fi
+    while [ $remainder -ne 0 ]
+    do
+    remainder=$((n1%n2))
+    n1=$n2
+    n2=$remainder
+    done
+    }
+    gcd $1 $2
+    echo "GCD is $n1"
+fi
+done
+```
+
 Задание №20: создаю файл sh, пишу программу и проверяю работу командного файла (рис. [-@fig:037]), (рис. [-@fig:038]), (рис. [-@fig:039]), (рис. [-@fig:040]), (рис. [-@fig:041])
 
 ![Создание файла для задания №20](image/ST3_37.png){#fig:037 width=70%}
@@ -251,6 +361,37 @@ yy (также Y) — копирование текущей строки в бу
 ![Задание №20 (1)](image/ST3_40.png){#fig:040 width=70%}
 
 ![Задание №20 (2)](image/ST3_41.png){#fig:041 width=70%}
+
+Программа для задания №20:
+
+```
+#!/bin/bash
+
+while [[ True ]]
+do
+    read num1 op num2
+    if [[ $num1 == "exit" ]]
+    then
+        echo "bye"
+        break
+    elif [[ *$num1* =~ "^[0-9]+$" && *$num2* =~ "^[0-9]+$" ]]
+    then
+        echo "error"
+        break
+    else
+    case $op in
+        "+") let "res = num1 + num2";;
+        "-") let "res = num1 - num2";;
+        "/") let "res = num1 / num2";;
+        "*") let "res = num1 * num2";;
+        "%") let "res = num1 % num2";;
+        "**") let "res = num1 ** num2";;
+        *) echo "error" ; exit ;;
+    esac
+    echo "$res"
+    fi
+done
+```
 
 Задание №21: -iname ищет без учета регистра, а -name в точности как в запросе. Звездочка стоит после слова, значит после слова бесконечное количество символов, до слова символов не должно быть. (рис. [-@fig:042])
 
@@ -307,6 +448,13 @@ etc.
 
 ![Задание №27](image/ST3_58.png){#fig:058 width=70%}
 
+Программа для задания №27:
+
+```
+#!/bin/bash
+sed 's/[A-Z]\{2,\} /abbreviation /g' input.txt > edited.txt
+```
+
 Задание №28: -p, --persist позволяет окнам графиков сохраняться после выхода из основной программы gnuplot (рис. [-@fig:059])
 
 ![Задание №28](image/ST3_59.png){#fig:059 width=70%}
@@ -334,6 +482,27 @@ etc.
 ![Работа программы для задания №31](image/ST3_67.png){#fig:067 width=70%}
 
 ![Задание №31](image/ST3_68.png){#fig:068 width=70%}
+
+Программы для задания №31:
+
+1) animated.gnu
+```
+#!/usr/bin/gnuplot --persist
+a=0 
+xrot=60 
+zrot=0 
+load "move.rot"
+```
+
+2) move.rot
+```
+a=a+1
+zrot=(zrot+350)%360
+set view xrot,zrot
+splot -x**2-y**2
+pause 0.1
+if (a<50) reread
+```
 
 Задание №32: на скрине всё видно (рис. [-@fig:069])
 
