@@ -1,1 +1,1 @@
-# Laboratory works
+# Report template on laboratory work
